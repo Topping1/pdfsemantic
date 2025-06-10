@@ -24,12 +24,12 @@ The PDF Semantic Viewer is a PyQt5-based application that leverages Qwen3 embedd
 1. Clone the repository:
     ```sh
     git clone https://github.com/Topping1/pdfsemantic.git
-    cd pdf-semantic-viewer
+    cd pdfsemantic
     ```
 
 2. Install the required packages:
     ```sh
-    pip install PyQt5 numpy requests pymupdf llama-cpp-python
+    pip install PyQt5 numpy requests pymupdf
     ```
 
 ## Usage
@@ -37,20 +37,21 @@ The PDF Semantic Viewer is a PyQt5-based application that leverages Qwen3 embedd
 ### Step 1: Serve Qwen3 Embeddings with llama-server
 To use Qwen3 embeddings, you need to serve them using `llama-server` from `llama.cpp`. Follow these steps to set up the server:
 
-1. Download the Qwen3 Embedding model from [Hugging Face](https://huggingface.co/Qwen/Qwen3-Embedding-4B-GGUF).
+1. Download the Qwen3 Embedding model (this example uses the 4B model but any other Qwen3 Embedding model works) from [Hugging Face](https://huggingface.co/Qwen/Qwen3-Embedding-4B-GGUF).
 
 2. Serve the model using `llama-server`. Make sure you have `llama.cpp` installed and the model file is accessible:
     ```sh
-    ./server -m /path/to/Qwen3-Embedding-4B-GGUF -c 4096 --port 8080
+    ./llama-server -m /path/to/Qwen3-Embedding-4B-Q8_0.gguf --embedding --pooling last -ub 8192 --verbose-prompt
+
     ```
-    This command starts the server with the specified model file and context size, listening on port 8080.
+    This command starts the server with the specified model file, with the recommended settings by Qwen.
 
 ### Step 2: Run the PDF Semantic Viewer
 1. Ensure the `llama-server` is running and serving the Qwen3 embeddings.
 
 2. Run the PDF Semantic Viewer script:
     ```sh
-    python pdf_semantic_viewer.py
+    python pdf-semantic.py
     ```
 
 ### Step 3: Perform Semantic Searches
@@ -65,6 +66,9 @@ The main components of the application are:
 - **Chunk Helpers**: Functions to split text into chunks for embedding.
 - **Worker Thread**: A QThread subclass to handle the embedding process in the background.
 - **GUI**: The main application window with a toolbar, PDF viewer, search box, and results list.
+
+## Others
+This app could potentially be used with other embeddings that can be served with llama-server, but some minor code modifications might be needed.
 
 ## License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
