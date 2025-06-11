@@ -3,6 +3,10 @@
 ## TL;DR
 This simple app allows users to test Qwen3 embeddings in a PDF semantic search tool. It provides a graphical interface to load PDFs, perform semantic searches, and visualize the results.
 
+## Screenshot
+![image](https://github.com/user-attachments/assets/d6d3ce8a-78f7-44ca-b4e2-e464aadb9c8e)
+
+
 ## Detailed Description
 The PDF Semantic Viewer is a PyQt5-based application that leverages Qwen3 embeddings to perform semantic searches within PDF documents. The application allows users to load PDF files, embed the text content using Qwen3 embeddings, and perform semantic searches to find relevant sections of the document. The search results are displayed in a list, and the relevant sections are highlighted in the PDF viewer.
 
